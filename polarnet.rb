@@ -17,7 +17,7 @@ def main
     medout = []
     (0...N).each do |i| # each medial neuron
       medin[i] = (0..2).map { |j| synone[j][i] * input[j] }.inject(:+)
-      medout[i] = Math.tanh(medin[i])
+      medout[i] = activation_function(medin[i])
     end
 
     output = []
@@ -47,7 +47,7 @@ def main
       (0..1).each do |j| # each output neuron
         sigma[i] += error[j] * syntwo[i][j]
       end
-      sigmoid[i] = 1 - (Math.tanh(medin[i]) ** 2)
+      sigmoid[i] = derivative_of_activation_function(medin[i])
     end
 
     # adjust first layer
@@ -58,6 +58,14 @@ def main
       end
     end
   end
+end
+
+def activation_function(x)
+ Math.tanh(x)
+end
+
+def derivative_of_activation_function(x)
+  1 - (Math.tanh(x) ** 2)
 end
 
 main
