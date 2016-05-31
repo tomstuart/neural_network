@@ -1,3 +1,5 @@
+require 'dual_number'
+
 N = 40
 LEARNING_RATE = 0.01
 BIAS = 2.0
@@ -47,7 +49,7 @@ def main
       (0..1).each do |j| # each output neuron
         sigma[i] += error[j] * syntwo[i][j]
       end
-      sigmoid[i] = derivative_of_activation_function(medin[i])
+      sigmoid[i] = activation_function(DualNumber(medin[i], 1)).dual
     end
 
     # adjust first layer
@@ -62,10 +64,6 @@ end
 
 def activation_function(x)
   (Math.exp(x) - Math.exp(-x)) / (Math.exp(x) + Math.exp(-x))
-end
-
-def derivative_of_activation_function(x)
-  1 - (Math.tanh(x) ** 2)
 end
 
 main
