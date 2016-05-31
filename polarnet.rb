@@ -61,7 +61,7 @@ def main
 end
 
 def activation_function(x)
- Math.tanh(x)
+  (Math.exp(x) - Math.exp(-x)) / (Math.exp(x) + Math.exp(-x))
 end
 
 def derivative_of_activation_function(x)
